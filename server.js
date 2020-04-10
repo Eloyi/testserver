@@ -44,7 +44,7 @@ const server = http.createServer((req,res)=>{   //http.createServer()创建服�
                 //这里fs找到了请求资源
          		console.log(data) //打印看看资源的内容
          		var mime = resMime.getMime(fs,extName);  //调用外部模块resMime,这个模块我是用来，请求的文件后缀名转换成mime标准的响应头Content-Type类型（比如说：'.css'=>'text/css','.js'=>'text/javascript'）
-         		res.writeHead(200,{"Content-Type":`${mime};chartset='utf8'`});
+         		res.writeHead(200,{"Content-Length": Buffer.byteLength(data),"Content-Type":`${mime};chartset='utf8'`});
          		res.write(data); //把文件写回客户端
          		res.end();   //结束
          	}
